@@ -1,2 +1,16 @@
-*.jar
 venv/
+__pycache__/
+*.pyc
+.env
+output/fhir/
+data/raw/
+models/clinicalbert_finetuned/
+models/fusion_model/
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+*.jar
+docker/
+Thumbs.db
+.DS_Store
+setup_and_train.py
+requirements_full.txt
