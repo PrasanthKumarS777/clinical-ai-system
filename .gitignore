@@ -4,8 +4,10 @@ __pycache__/
 .env
 output/fhir/
 data/raw/
+data/processed/
 models/clinicalbert_finetuned/
 models/fusion_model/
+models/*.pkl
 .ipynb_checkpoints/
 notebooks/.ipynb_checkpoints/
 *.jar
@@ -13,4 +15,7 @@ docker/
 Thumbs.db
 .DS_Store
 setup_and_train.py
-requirements_full.txtoutput/csv/
+requirements_full.txt
+output/csv/
+output/*.csv
+*.csv

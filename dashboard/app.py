@@ -1,7 +1,7 @@
 """
 Clinical-AI Mortality Risk Dashboard — Premium Edition
 =======================================================
-Design: Syne + DM Mono · #0a0c10 dark · cyan/purple/red palette
+Design: Space Grotesk + IBM Plex Mono · #070d0b dark · emerald/gold/coral palette
 Full data integration: patients, conditions, medications, encounters,
 procedures, observations, immunizations, allergies, imaging studies.
 Run:  streamlit run dashboard/app.py
@@ -41,56 +41,56 @@ st.set_page_config(
 )
 
 # ══════════════════════════════════════════════════════════════════════════════
-# DESIGN TOKENS  (same DNA as DeepCSAT)
+# DESIGN TOKENS  — Emerald / Gold / Coral palette
 # ══════════════════════════════════════════════════════════════════════════════
-A  = "#00e5ff"   # cyan  — primary accent
-A2 = "#7b61ff"   # purple
-A3 = "#ff4d6d"   # red / danger
-GO = "#ffd166"   # amber / warning
-GR = "#00c9a7"   # teal / success
+A  = "#00b894"   # emerald mint  — primary accent
+A2 = "#fdcb6e"   # golden yellow
+A3 = "#e17055"   # warm coral / danger
+GO = "#74b9ff"   # sky blue / info
+GR = "#55efc4"   # bright mint / success
 
 PL = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="DM Mono, monospace", color="#9ca3af", size=11),
-    title_font=dict(color="#e8eaf0", size=14, family="Syne, sans-serif"),
-    xaxis=dict(gridcolor="#1f2430", linecolor="#1f2430", tickfont=dict(size=10)),
-    yaxis=dict(gridcolor="#1f2430", linecolor="#1f2430", tickfont=dict(size=10)),
+    font=dict(family="IBM Plex Mono, monospace", color="#9ca3af", size=11),
+    title_font=dict(color="#dfe6e9", size=14, family="Space Grotesk, sans-serif"),
+    xaxis=dict(gridcolor="#1a2420", linecolor="#1a2420", tickfont=dict(size=10)),
+    yaxis=dict(gridcolor="#1a2420", linecolor="#1a2420", tickfont=dict(size=10)),
     margin=dict(l=20, r=20, t=44, b=20),
-    legend=dict(bgcolor="rgba(0,0,0,0)", bordercolor="#1f2430", borderwidth=1),
-    colorway=[A, A2, A3, GO, GR, "#ff9a3c", "#a78bfa"],
+    legend=dict(bgcolor="rgba(0,0,0,0)", bordercolor="#1a2420", borderwidth=1),
+    colorway=[A, A2, A3, GO, GR, "#a29bfe", "#fd79a8"],
 )
 
 # ══════════════════════════════════════════════════════════════════════════════
 # GLOBAL CSS
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""<style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
 
 :root{{
-  --bg:#0a0c10; --s:#111318; --s2:#181b22; --b:#1f2430;
-  --t:#e8eaf0;  --m:#6b7280;
-  --cyan:{A}; --purple:{A2}; --red:{A3}; --amber:{GO}; --teal:{GR};
+  --bg:#070d0b; --s:#0e1714; --s2:#141f1b; --b:#1a2420;
+  --t:#dfe6e9;  --m:#6b7280;
+  --mint:{A}; --gold:{A2}; --coral:{A3}; --sky:{GO}; --teal:{GR};
 }}
 
-[data-testid="stAppViewContainer"]{{background:#0a0c10 !important;}}
-[data-testid="stAppViewContainer"] > .main{{background:#0a0c10 !important;}}
-[data-testid="stSidebar"]{{background:#111318 !important; border-right:1px solid #1f2430 !important;}}
-[data-testid="stSidebar"] *{{color:#e8eaf0;}}
+[data-testid="stAppViewContainer"]{{background:#070d0b !important;}}
+[data-testid="stAppViewContainer"] > .main{{background:#070d0b !important;}}
+[data-testid="stSidebar"]{{background:#0e1714 !important; border-right:1px solid #1a2420 !important;}}
+[data-testid="stSidebar"] *{{color:#dfe6e9;}}
 #MainMenu{{visibility:hidden !important;}}
 footer{{visibility:hidden !important;}}
 [data-testid="stDeployButton"]{{display:none !important;}}
 
 html,body,[class*="css"]{{
-  font-family:'DM Mono',monospace !important;
-  color:#e8eaf0 !important;
+  font-family:'IBM Plex Mono',monospace !important;
+  color:#dfe6e9 !important;
 }}
-h1,h2,h3,h4{{font-family:'Syne',sans-serif !important; color:#e8eaf0 !important;}}
+h1,h2,h3,h4{{font-family:'Space Grotesk',sans-serif !important; color:#dfe6e9 !important;}}
 
 /* ── HERO BANNER ── */
 .hero{{
-  background:linear-gradient(135deg,#0d1117,#111827);
-  border:1px solid #1f2430; border-radius:16px;
+  background:linear-gradient(135deg,#0b1410,#111f1a);
+  border:1px solid #1a2420; border-radius:16px;
   padding:36px 36px 28px; margin-bottom:24px;
   position:relative; overflow:hidden;
 }}
@@ -99,22 +99,22 @@ h1,h2,h3,h4{{font-family:'Syne',sans-serif !important; color:#e8eaf0 !important;
   background:linear-gradient(90deg,{A},{A2},transparent);
 }}
 .htitle{{
-  font-family:'Syne',sans-serif; font-size:2.6rem; font-weight:800;
+  font-family:'Space Grotesk',sans-serif; font-size:2.6rem; font-weight:800;
   background:linear-gradient(90deg,{A},{A2});
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   line-height:1.1; margin:0 0 6px;
 }}
 .hsub{{font-size:.85rem; color:#6b7280; letter-spacing:.06em; margin-bottom:0;}}
 .tag{{
-  display:inline-block; background:rgba(0,229,255,.08);
-  border:1px solid rgba(0,229,255,.25); color:{A};
+  display:inline-block; background:rgba(0,184,148,.08);
+  border:1px solid rgba(0,184,148,.25); color:{A};
   font-size:.62rem; letter-spacing:.12em; text-transform:uppercase;
   padding:3px 10px; border-radius:100px; margin:10px 4px 0 0;
 }}
 
 /* ── KPI CARD ── */
 .kcard{{
-  background:#111318; border:1px solid #1f2430;
+  background:#0e1714; border:1px solid #1a2420;
   border-radius:12px; padding:18px 20px;
   position:relative; overflow:hidden;
   transition:border-color .25s, box-shadow .25s;
@@ -123,60 +123,60 @@ h1,h2,h3,h4{{font-family:'Syne',sans-serif !important; color:#e8eaf0 !important;
   content:''; position:absolute; top:0; left:0; right:0; height:2px;
   background:linear-gradient(90deg,{A},{A2});
 }}
-.kcard:hover{{border-color:rgba(0,229,255,.4); box-shadow:0 8px 28px rgba(0,229,255,.08);}}
+.kcard:hover{{border-color:rgba(0,184,148,.4); box-shadow:0 8px 28px rgba(0,184,148,.08);}}
 .klabel{{font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:#6b7280; margin-bottom:6px;}}
-.kval{{font-family:'Syne',sans-serif; font-size:1.9rem; font-weight:700; color:{A}; line-height:1;}}
+.kval{{font-family:'Space Grotesk',sans-serif; font-size:1.9rem; font-weight:700; color:{A}; line-height:1;}}
 .kdelta{{font-size:.7rem; color:{GR}; margin-top:4px;}}
 
 /* ── SECTION HEADER ── */
 .sec{{
   display:flex; align-items:center; gap:10px;
-  margin:28px 0 14px; border-bottom:1px solid #1f2430; padding-bottom:10px;
+  margin:28px 0 14px; border-bottom:1px solid #1a2420; padding-bottom:10px;
 }}
 .snum{{
-  font-size:.62rem; color:{A}; background:rgba(0,229,255,.08);
-  border:1px solid rgba(0,229,255,.2); padding:2px 7px; border-radius:4px;
+  font-size:.62rem; color:{A}; background:rgba(0,184,148,.08);
+  border:1px solid rgba(0,184,148,.2); padding:2px 7px; border-radius:4px;
 }}
-.stitle{{font-family:'Syne',sans-serif; font-size:1.15rem; font-weight:700; color:#e8eaf0; margin:0;}}
+.stitle{{font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:#dfe6e9; margin:0;}}
 
 /* ── INFO BOX ── */
 .ibox{{
-  background:rgba(0,229,255,.04); border:1px solid rgba(0,229,255,.15);
+  background:rgba(0,184,148,.04); border:1px solid rgba(0,184,148,.15);
   border-radius:10px; padding:12px 16px; margin:10px 0;
   font-size:.82rem; color:#6b7280; line-height:1.6;
 }}
 
 /* ── GENERIC CARD ── */
-.mcard{{background:#111318; border:1px solid #1f2430; border-radius:12px; padding:20px; margin-bottom:14px;}}
+.mcard{{background:#0e1714; border:1px solid #1a2420; border-radius:12px; padding:20px; margin-bottom:14px;}}
 
 /* ── RESULT CARD ── */
 .pres{{
-  background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(123,97,255,.08));
-  border:1px solid rgba(0,229,255,.25); border-radius:14px;
+  background:linear-gradient(135deg,rgba(0,184,148,.08),rgba(253,203,110,.08));
+  border:1px solid rgba(0,184,148,.25); border-radius:14px;
   padding:28px; text-align:center; margin-top:18px;
 }}
 .pscore{{
-  font-family:'Syne',sans-serif; font-weight:800; font-size:4rem; line-height:1;
+  font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:4rem; line-height:1;
   background:linear-gradient(90deg,{A},{A2});
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
 }}
 .badge{{
   display:inline-block; padding:3px 10px; border-radius:100px; font-size:.62rem;
-  background:rgba(0,201,167,.12); border:1px solid rgba(0,201,167,.3);
+  background:rgba(85,239,196,.12); border:1px solid rgba(85,239,196,.3);
   color:{GR}; margin-left:8px;
 }}
-.badge-red{{background:rgba(255,77,109,.12); border-color:rgba(255,77,109,.3); color:{A3};}}
+.badge-red{{background:rgba(225,112,85,.12); border-color:rgba(225,112,85,.3); color:{A3};}}
 
 /* ── TABS ── */
-.stTabs [data-baseweb="tab-list"]{{background:#181b22 !important; border-radius:10px !important; padding:4px !important; gap:2px !important;}}
-.stTabs [data-baseweb="tab"]{{color:#6b7280 !important; border-radius:7px !important; font-family:'DM Mono',monospace !important; font-size:.75rem !important; letter-spacing:.06em !important;}}
-.stTabs [aria-selected="true"]{{background:#111318 !important; color:{A} !important;}}
+.stTabs [data-baseweb="tab-list"]{{background:#141f1b !important; border-radius:10px !important; padding:4px !important; gap:2px !important;}}
+.stTabs [data-baseweb="tab"]{{color:#6b7280 !important; border-radius:7px !important; font-family:'IBM Plex Mono',monospace !important; font-size:.75rem !important; letter-spacing:.06em !important;}}
+.stTabs [aria-selected="true"]{{background:#0e1714 !important; color:{A} !important;}}
 
 /* ── BUTTON ── */
 .stButton>button{{
   background:linear-gradient(135deg,{A},{A2}) !important;
   border:none !important; border-radius:8px !important;
-  color:#000 !important; font-family:'Syne',sans-serif !important;
+  color:#070d0b !important; font-family:'Space Grotesk',sans-serif !important;
   font-weight:700 !important; letter-spacing:.08em !important;
   padding:10px 28px !important; text-transform:uppercase !important;
   transition:opacity .2s !important;
@@ -185,23 +185,23 @@ h1,h2,h3,h4{{font-family:'Syne',sans-serif !important; color:#e8eaf0 !important;
 
 /* ── INPUTS ── */
 .stNumberInput input,.stTextInput input,.stTextArea textarea{{
-  background:#181b22 !important; border:1px solid #1f2430 !important;
-  color:#e8eaf0 !important; border-radius:8px !important;
-  font-family:'DM Mono',monospace !important; font-size:.82rem !important;
+  background:#141f1b !important; border:1px solid #1a2420 !important;
+  color:#dfe6e9 !important; border-radius:8px !important;
+  font-family:'IBM Plex Mono',monospace !important; font-size:.82rem !important;
 }}
-.stSelectbox>div>div{{background:#181b22 !important; border:1px solid #1f2430 !important; border-radius:8px !important;}}
+.stSelectbox>div>div{{background:#141f1b !important; border:1px solid #1a2420 !important; border-radius:8px !important;}}
 
 /* ── DATAFRAME ── */
-[data-testid="stDataFrame"]{{border:1px solid #1f2430 !important; border-radius:10px !important;}}
+[data-testid="stDataFrame"]{{border:1px solid #1a2420 !important; border-radius:10px !important;}}
 
 /* ── METRIC ── */
-[data-testid="stMetric"]{{background:#111318 !important; border:1px solid #1f2430 !important; border-radius:12px !important; padding:1rem 1.2rem !important;}}
-[data-testid="stMetricLabel"]{{font-family:'DM Mono',monospace !important; font-size:.65rem !important; letter-spacing:.1em !important; text-transform:uppercase !important; color:#6b7280 !important;}}
-[data-testid="stMetricValue"]{{font-family:'Syne',sans-serif !important; font-size:1.9rem !important; font-weight:700 !important; color:{A} !important;}}
+[data-testid="stMetric"]{{background:#0e1714 !important; border:1px solid #1a2420 !important; border-radius:12px !important; padding:1rem 1.2rem !important;}}
+[data-testid="stMetricLabel"]{{font-family:'IBM Plex Mono',monospace !important; font-size:.65rem !important; letter-spacing:.1em !important; text-transform:uppercase !important; color:#6b7280 !important;}}
+[data-testid="stMetricValue"]{{font-family:'Space Grotesk',sans-serif !important; font-size:1.9rem !important; font-weight:700 !important; color:{A} !important;}}
 
 /* ── SIDEBAR NAV ── */
 [data-testid="stSidebar"] .stRadio label{{
-  font-family:'DM Mono',monospace !important; font-size:.78rem !important;
+  font-family:'IBM Plex Mono',monospace !important; font-size:.78rem !important;
   letter-spacing:.04em !important; color:#6b7280 !important;
   transition:color .2s !important; padding:.35rem 0 !important;
 }}
@@ -209,17 +209,17 @@ h1,h2,h3,h4{{font-family:'Syne',sans-serif !important; color:#e8eaf0 !important;
 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{{width:4px; height:4px;}}
-::-webkit-scrollbar-track{{background:#0a0c10;}}
-::-webkit-scrollbar-thumb{{background:#1f2430; border-radius:2px;}}
+::-webkit-scrollbar-track{{background:#070d0b;}}
+::-webkit-scrollbar-thumb{{background:#1a2420; border-radius:2px;}}
 ::-webkit-scrollbar-thumb:hover{{background:{A};}}
 
 /* ── ALERT ── */
 .stSuccess,.stInfo,.stWarning,.stError{{
-  border-radius:10px !important; font-family:'DM Mono',monospace !important; font-size:.8rem !important;
+  border-radius:10px !important; font-family:'IBM Plex Mono',monospace !important; font-size:.8rem !important;
 }}
 
 /* ── DIVIDER ── */
-hr{{border-color:#1f2430 !important; margin:1.2rem 0 !important;}}
+hr{{border-color:#1a2420 !important; margin:1.2rem 0 !important;}}
 </style>""", unsafe_allow_html=True)
 
 
@@ -253,15 +253,15 @@ def kpi(col, label, val, delta="", color=A):
 
 def chart(fig, height=320):
     fig.update_layout(**{**PL, "height": height})
-    fig.update_xaxes(gridcolor="#1f2430", linecolor="#1f2430")
-    fig.update_yaxes(gridcolor="#1f2430", linecolor="#1f2430")
+    fig.update_xaxes(gridcolor="#1a2420", linecolor="#1a2420")
+    fig.update_yaxes(gridcolor="#1a2420", linecolor="#1a2420")
     st.plotly_chart(fig, use_container_width=True)
 
 def hbar(names, values, title="", color=A, height=320, pct=False):
     txt = [f"{v:.1f}%" if pct else f"{v:,.0f}" for v in values]
     fig = go.Figure(go.Bar(
         x=values, y=names, orientation="h",
-        marker=dict(color=values, colorscale=[[0, "#1f2430"], [0.5, A2], [1, color]], line_width=0),
+        marker=dict(color=values, colorscale=[[0, "#1a2420"], [0.5, A2], [1, color]], line_width=0),
         text=txt, textposition="outside", textfont=dict(size=10, color="#6b7280"),
     ))
     fig.update_layout(title=title)
@@ -270,7 +270,7 @@ def hbar(names, values, title="", color=A, height=320, pct=False):
 def vbar(labels, values, title="", color=A, height=300):
     fig = go.Figure(go.Bar(
         x=labels, y=values,
-        marker=dict(color=values, colorscale=[[0, "#1f2430"], [0.5, A2], [1, color]], line_width=0),
+        marker=dict(color=values, colorscale=[[0, "#1a2420"], [0.5, A2], [1, color]], line_width=0),
         text=[f"{v:,.0f}" for v in values], textposition="outside",
         textfont=dict(size=10, color="#6b7280"),
     ))
@@ -333,12 +333,12 @@ def setup_banner():
 with st.sidebar:
     st.markdown(f"""
     <div style='padding:16px 0 6px;'>
-      <div style='font-family:Syne,sans-serif;font-weight:800;font-size:1.35rem;
+      <div style='font-family:Space Grotesk,sans-serif;font-weight:800;font-size:1.35rem;
                   background:linear-gradient(90deg,{A},{A2});
                   -webkit-background-clip:text;-webkit-text-fill-color:transparent;'>⚕ ClinicalAI</div>
       <div style='font-size:.6rem;color:#6b7280;letter-spacing:.1em;margin-top:3px;'>MORTALITY INTELLIGENCE v2.0</div>
     </div>
-    <hr style='border:none;border-top:1px solid #1f2430;margin:10px 0;'>
+    <hr style='border:none;border-top:1px solid #1a2420;margin:10px 0;'>
     """, unsafe_allow_html=True)
 
     page = st.radio("Navigate", [
@@ -356,8 +356,8 @@ with st.sidebar:
     ], label_visibility="collapsed")
 
     st.markdown(f"""
-    <hr style='border:none;border-top:1px solid #1f2430;margin:14px 0;'>
-    <div style='font-size:.65rem;color:#374151;line-height:2.0;font-family:DM Mono,monospace;'>
+    <hr style='border:none;border-top:1px solid #1a2420;margin:14px 0;'>
+    <div style='font-size:.65rem;color:#374151;line-height:2.0;font-family:IBM Plex Mono,monospace;'>
       PROJECT · ClinicalAI DL<br>
       TYPE · Mortality Prediction<br>
       MODELS · XGB · LR · RF · FUSION<br>
@@ -370,12 +370,12 @@ with st.sidebar:
         total    = len(df_pat)
         deceased = int(df_pat["DECEASED"].sum())
         st.markdown(f"""
-        <hr style='border:none;border-top:1px solid #1f2430;margin:14px 0;'>
-        <div style='font-size:.65rem;color:#374151;line-height:2.0;font-family:DM Mono,monospace;'>
+        <hr style='border:none;border-top:1px solid #1a2420;margin:14px 0;'>
+        <div style='font-size:.65rem;color:#374151;line-height:2.0;font-family:IBM Plex Mono,monospace;'>
           <span style='color:{A};letter-spacing:.1em;text-transform:uppercase;'>COHORT LIVE</span><br>
-          PATIENTS &nbsp;&nbsp;<span style='color:#e8eaf0;'>{total:,}</span><br>
+          PATIENTS &nbsp;&nbsp;<span style='color:#dfe6e9;'>{total:,}</span><br>
           DECEASED &nbsp;&nbsp;<span style='color:{A3};'>{deceased:,}</span><br>
-          MORTALITY &nbsp;<span style='color:{GO};'>{100*deceased/total:.1f}%</span>
+          MORTALITY &nbsp;<span style='color:{A2};'>{100*deceased/total:.1f}%</span>
         </div>""", unsafe_allow_html=True)
 
 
@@ -406,8 +406,8 @@ if "Overview" in page:
     kpi(c1, "Total Patients",    f"{total:,}",         "Synthea cohort")
     kpi(c2, "Deceased",          f"{deceased:,}",      f"{mort_rt*100:.1f}% mortality", A3)
     kpi(c3, "Alive",             f"{alive:,}",         f"{(1-mort_rt)*100:.1f}% survival", GR)
-    kpi(c4, "Avg Age",           f"{avg_age:.1f}",     "years", GO)
-    kpi(c5, "Avg Conditions",    f"{avg_cond:.1f}",    "per patient", A2)
+    kpi(c4, "Avg Age",           f"{avg_age:.1f}",     "years", A2)
+    kpi(c5, "Avg Conditions",    f"{avg_cond:.1f}",    "per patient", GO)
     kpi(c6, "Avg Medications",   f"{avg_meds:.1f}",    "per patient", A)
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -428,17 +428,17 @@ if "Overview" in page:
         fig = go.Figure(go.Pie(
             labels=["Alive", "Deceased"],
             values=[alive, deceased], hole=0.68,
-            marker=dict(colors=[A, A3], line=dict(color="#0a0c10", width=3)),
+            marker=dict(colors=[A, A3], line=dict(color="#070d0b", width=3)),
             textinfo="none",
         ))
         fig.add_annotation(
             text=f"<b>{mort_rt*100:.1f}%</b>",
             x=0.5, y=0.55, showarrow=False,
-            font=dict(size=28, color=A3, family="Syne"))
+            font=dict(size=28, color=A3, family="Space Grotesk"))
         fig.add_annotation(
             text="MORTALITY",
             x=0.5, y=0.38, showarrow=False,
-            font=dict(size=11, color="#6b7280", family="DM Mono"))
+            font=dict(size=11, color="#6b7280", family="IBM Plex Mono"))
         fig.update_layout(title="OUTCOME SPLIT")
         chart(fig, 340)
 
@@ -450,7 +450,7 @@ if "Overview" in page:
         fig = go.Figure(go.Bar(
             y=rc.index.tolist(), x=rc.values.tolist(), orientation="h",
             marker=dict(color=rc.values.tolist(),
-                        colorscale=[[0,"#1f2430"],[0.5,A2],[1,A]], line_width=0),
+                        colorscale=[[0,"#1a2420"],[0.5,A2],[1,A]], line_width=0),
             text=[f"{v:,}" for v in rc.values], textposition="outside",
             textfont=dict(size=10, color="#6b7280"),
         ))
@@ -469,7 +469,7 @@ if "Overview" in page:
                 mode="lines+markers",
                 line=dict(color=GR, width=2.5),
                 marker=dict(size=grp["count"]/grp["count"].max()*18+5,
-                            color=GR, opacity=0.85, line=dict(color="#0a0c10",width=1)),
+                            color=GR, opacity=0.85, line=dict(color="#070d0b",width=1)),
                 name="Mortality %",
             ))
             fig.update_yaxes(title_text="Mortality %")
@@ -496,7 +496,7 @@ if "Overview" in page:
         cols[i % 4].markdown(f"""
         <div class='kcard' style='padding:14px;'>
           <div style='color:{sc};font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;'>{si} {st_lbl}</div>
-          <div style='font-family:Syne,sans-serif;font-weight:700;font-size:.88rem;color:#e8eaf0;margin-bottom:3px;'>{label}</div>
+          <div style='font-family:Space Grotesk,sans-serif;font-weight:700;font-size:.88rem;color:#dfe6e9;margin-bottom:3px;'>{label}</div>
           <div style='font-size:.7rem;color:#6b7280;'>{metric}</div>
         </div>""", unsafe_allow_html=True)
 
@@ -550,7 +550,7 @@ elif "Predictor" in page:
         if not predict_btn:
             st.markdown(f"""
             <div style='text-align:center;padding:5rem 0;color:#374151;
-                font-family:DM Mono,monospace;font-size:.82rem;letter-spacing:.08em;'>
+                font-family:IBM Plex Mono,monospace;font-size:.82rem;letter-spacing:.08em;'>
               ← FILL PATIENT DATA AND CLICK RUN
             </div>""", unsafe_allow_html=True)
         else:
@@ -576,7 +576,15 @@ elif "Predictor" in page:
             except: lr_p = xgb_p * 0.9
             try:    rf_p = float(models["rf"].predict_proba(row)[:,1][0])
             except: rf_p = xgb_p * 0.95
-            fusion_p = float(models["fusion"].predict_proba(np.column_stack([[lr_p],[rf_p]]))[0,1])
+
+            # ── FIX: wrap fusion predict_proba in try/except to handle
+            #    sklearn version compatibility (multi_class attr removed in ≥1.5)
+            try:
+                fusion_p = float(models["fusion"].predict_proba(
+                    np.column_stack([[lr_p],[rf_p]]))[0,1])
+            except Exception:
+                fusion_p = float(np.mean([lr_p, rf_p]))
+
             nlp_p = None
             if "vectorizer" in models and text.strip():
                 try:
@@ -586,7 +594,7 @@ elif "Predictor" in page:
             def pct(v): return f"{min(99.9,max(0.0,v*100)):.1f}%"
             def risk_tier(v):
                 if v < 0.3: return "LOW RISK", GR
-                if v < 0.6: return "MODERATE", GO
+                if v < 0.6: return "MODERATE", A2
                 return              "HIGH RISK", A3
 
             primary_label, primary_color = risk_tier(xgb_p)
@@ -594,17 +602,17 @@ elif "Predictor" in page:
             fig_g = go.Figure(go.Indicator(
                 mode="gauge+number",
                 value=xgb_p*100,
-                title={"text":"XGBoost Mortality Risk", "font":{"family":"Syne","size":13,"color":"#e8eaf0"}},
-                number={"suffix":"%","font":{"family":"Syne","size":40,"color":primary_color}},
+                title={"text":"XGBoost Mortality Risk", "font":{"family":"Space Grotesk","size":13,"color":"#dfe6e9"}},
+                number={"suffix":"%","font":{"family":"Space Grotesk","size":40,"color":primary_color}},
                 gauge={
                     "axis":  {"range":[0,100],"tickcolor":"#6b7280","tickfont":{"size":10}},
                     "bar":   {"color":primary_color,"thickness":0.22},
                     "bgcolor":"rgba(0,0,0,0)",
-                    "bordercolor":"#1f2430",
+                    "bordercolor":"#1a2420",
                     "steps":[
-                        {"range":[0,30],  "color":"rgba(0,201,167,0.07)"},
-                        {"range":[30,60], "color":"rgba(255,209,102,0.07)"},
-                        {"range":[60,100],"color":"rgba(255,77,109,0.07)"},
+                        {"range":[0,30],  "color":"rgba(85,239,196,0.07)"},
+                        {"range":[30,60], "color":"rgba(253,203,110,0.07)"},
+                        {"range":[60,100],"color":"rgba(225,112,85,0.07)"},
                     ],
                 },
             ))
@@ -614,7 +622,7 @@ elif "Predictor" in page:
             with gc1:
                 st.plotly_chart(fig_g, use_container_width=True)
                 st.markdown(f"""
-                <div style='text-align:center;font-family:Syne,sans-serif;font-size:1.6rem;
+                <div style='text-align:center;font-family:Space Grotesk,sans-serif;font-size:1.6rem;
                     font-weight:800;color:{primary_color};letter-spacing:.1em;margin-top:-1rem;'>
                   {primary_label}
                 </div>""", unsafe_allow_html=True)
@@ -637,11 +645,11 @@ elif "Predictor" in page:
                       <div style='display:flex;justify-content:space-between;align-items:center;'>
                         <div style='font-size:.78rem;color:#9ca3af;'>{name}</div>
                         <div>
-                          <span style='font-family:Syne,sans-serif;font-size:1.1rem;font-weight:700;color:{color};'>{pct(score)}</span>
+                          <span style='font-family:Space Grotesk,sans-serif;font-size:1.1rem;font-weight:700;color:{color};'>{pct(score)}</span>
                           <span style='font-size:.6rem;color:{lcol};margin-left:8px;text-transform:uppercase;letter-spacing:.1em;'>{lbl}</span>
                         </div>
                       </div>
-                      <div style='background:#1f2430;border-radius:3px;height:3px;margin-top:8px;'>
+                      <div style='background:#1a2420;border-radius:3px;height:3px;margin-top:8px;'>
                         <div style='background:{color};width:{min(score*100,99.9):.1f}%;height:3px;border-radius:3px;'></div>
                       </div>
                     </div>""", unsafe_allow_html=True)
@@ -652,15 +660,15 @@ elif "Predictor" in page:
                 if age > 75:              drivers.append(("Age > 75",              f"{age} yrs", A3))
                 if icu_visits > 0:        drivers.append(("ICU Visits",            f"{icu_visits} visit(s)", A3))
                 if condition_count > 5:   drivers.append(("High Condition Count",  f"{condition_count}", A3))
-                if income < 30_000:       drivers.append(("Low Income",            f"${income:,}", GO))
-                if systolic > 160:        drivers.append(("Hypertension",          f"{systolic} mmHg", GO))
-                if medication_count > 8:  drivers.append(("High Medication Load",  f"{medication_count} meds", GO))
+                if income < 30_000:       drivers.append(("Low Income",            f"${income:,}", A2))
+                if systolic > 160:        drivers.append(("Hypertension",          f"{systolic} mmHg", A2))
+                if medication_count > 8:  drivers.append(("High Medication Load",  f"{medication_count} meds", A2))
                 if not drivers:           drivers.append(("No major risk flags",   "Low-risk profile", GR))
                 for label, detail, color in drivers:
                     st.markdown(f"""
-                    <div style='display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #1f2430;'>
+                    <div style='display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #1a2420;'>
                       <div style='width:8px;height:8px;border-radius:50%;background:{color};flex-shrink:0;'></div>
-                      <div style='font-size:.82rem;color:#e8eaf0;font-weight:600;'>{label}</div>
+                      <div style='font-size:.82rem;color:#dfe6e9;font-weight:600;'>{label}</div>
                       <div style='font-size:.78rem;color:#6b7280;margin-left:auto;'>{detail}</div>
                     </div>""", unsafe_allow_html=True)
 
@@ -686,7 +694,7 @@ elif "Population" in page:
             fig = go.Figure(go.Bar(
                 y=rc.index.tolist(), x=rc.values.tolist(), orientation="h",
                 marker=dict(color=list(range(len(rc))),
-                            colorscale=[[0,"#1f2430"],[0.5,A2],[1,A]], line_width=0),
+                            colorscale=[[0,"#1a2420"],[0.5,A2],[1,A]], line_width=0),
                 text=[f"{v:,}" for v in rc.values], textposition="outside",
                 textfont=dict(size=10, color="#6b7280"),
             ))
@@ -697,7 +705,7 @@ elif "Population" in page:
             ec = df["ETHNICITY"].value_counts()
             fig = go.Figure(go.Pie(
                 labels=ec.index.tolist(), values=ec.values.tolist(), hole=0.55,
-                marker=dict(colors=[A,A2,A3], line=dict(color="#0a0c10",width=3)),
+                marker=dict(colors=[A,A2,A3], line=dict(color="#070d0b",width=3)),
             ))
             fig.update_layout(title="ETHNICITY SPLIT")
             chart(fig, 320)
@@ -718,13 +726,12 @@ elif "Population" in page:
                 chart(fig, 280)
 
             with c4:
-                # Mortality rate by gender
                 df2 = df.copy()
                 df2["GENDER_LABEL"] = gmap
                 gm = df2.groupby("GENDER_LABEL")["DECEASED"].mean() * 100
                 fig = go.Figure(go.Bar(
                     x=gm.index.tolist(), y=gm.values.tolist(),
-                    marker=dict(color=[A3, GO], line_width=0),
+                    marker=dict(color=[A3, A2], line_width=0),
                     text=[f"{v:.1f}%" for v in gm.values], textposition="outside",
                     textfont=dict(size=11, color="#6b7280"),
                 ))
@@ -759,7 +766,7 @@ elif "Population" in page:
             if "CONDITION_COUNT" in df.columns:
                 fig = go.Figure(go.Histogram(x=df["CONDITION_COUNT"], nbinsx=20,
                     marker=dict(color=df["CONDITION_COUNT"].value_counts().sort_index().values.tolist(),
-                                colorscale=[[0,"#1f2430"],[1,A2]], line_width=0)))
+                                colorscale=[[0,"#1a2420"],[1,A2]], line_width=0)))
                 fig.update_layout(title="CONDITION COUNT DISTRIBUTION", xaxis_title="Conditions")
                 chart(fig, 280)
         with c4:
@@ -775,7 +782,7 @@ elif "Population" in page:
             fig = go.Figure(go.Bar(
                 x=icu_c.index.astype(str).tolist(), y=icu_c.values.tolist(),
                 marker=dict(color=icu_c.values.tolist(),
-                            colorscale=[[0,"#1f2430"],[0.5,GO],[1,A3]], line_width=0),
+                            colorscale=[[0,"#1a2420"],[0.5,A2],[1,A3]], line_width=0),
                 text=[f"{v:,}" for v in icu_c.values], textposition="outside",
                 textfont=dict(size=10, color="#6b7280"),
             ))
@@ -820,11 +827,11 @@ elif "Medications" in page:
                 df_med[cost_col] = pd.to_numeric(df_med[cost_col], errors="coerce")
                 c1, c2 = st.columns(2)
                 with c1:
-                    kpi(c1,"Avg Medication Cost", f"${df_med[cost_col].mean():.2f}", "per prescription", GO)
+                    kpi(c1,"Avg Medication Cost", f"${df_med[cost_col].mean():.2f}", "per prescription", A2)
                 with c2:
                     kpi(c2,"Total Spend", f"${df_med[cost_col].sum():,.0f}", "across all patients", A3)
                 fig = go.Figure(go.Histogram(x=df_med[cost_col].dropna(),
-                    nbinsx=60, marker=dict(color=GO, opacity=0.8, line_width=0)))
+                    nbinsx=60, marker=dict(color=A2, opacity=0.8, line_width=0)))
                 fig.update_layout(title="MEDICATION COST DISTRIBUTION", xaxis_title="Cost (USD)")
                 chart(fig, 280)
 
@@ -856,7 +863,7 @@ elif "Medications" in page:
                     mode="lines+markers",
                     line=dict(color=A2, width=2.5),
                     marker=dict(color=A2, size=6),
-                    fill="tozeroy", fillcolor="rgba(123,97,255,0.08)",
+                    fill="tozeroy", fillcolor="rgba(253,203,110,0.08)",
                 ))
                 fig.update_layout(title="NEW CONDITIONS BY YEAR", xaxis_title="Year")
                 chart(fig, 280)
@@ -894,11 +901,11 @@ elif "Encounters" in page:
             if cost_col:
                 df_enc[cost_col] = pd.to_numeric(df_enc[cost_col], errors="coerce")
                 c1, c2, c3 = st.columns(3)
-                kpi(c1, "Avg Encounter Cost", f"${df_enc[cost_col].mean():,.2f}", "per visit", GO)
+                kpi(c1, "Avg Encounter Cost", f"${df_enc[cost_col].mean():,.2f}", "per visit", A2)
                 kpi(c2, "Median Cost",        f"${df_enc[cost_col].median():,.2f}", "50th percentile", A)
                 kpi(c3, "Total Encounter Spend", f"${df_enc[cost_col].sum()/1e6:.1f}M", "cumulative", A3)
                 fig = go.Figure(go.Histogram(x=df_enc[cost_col].dropna().clip(upper=df_enc[cost_col].quantile(0.99)),
-                    nbinsx=60, marker=dict(color=GO, opacity=0.8, line_width=0)))
+                    nbinsx=60, marker=dict(color=A2, opacity=0.8, line_width=0)))
                 fig.update_layout(title="ENCOUNTER COST DISTRIBUTION (99th pct clip)", xaxis_title="Cost USD")
                 chart(fig, 260)
 
@@ -911,7 +918,7 @@ elif "Encounters" in page:
                     x=yearly.index.tolist(), y=yearly.values.tolist(),
                     mode="lines+markers", line=dict(color=A,width=2.5),
                     marker=dict(color=A,size=6),
-                    fill="tozeroy", fillcolor="rgba(0,229,255,0.06)",
+                    fill="tozeroy", fillcolor="rgba(0,184,148,0.06)",
                 ))
                 fig.update_layout(title="ENCOUNTERS BY YEAR")
                 chart(fig, 260)
@@ -961,7 +968,6 @@ elif "Observations" in page:
                 hbar(top_obs.index.tolist(), top_obs.values.tolist(),
                      "TOP 20 OBSERVATION TYPES", A, 420)
             val_col = next((c for c in ["VALUE","value"] if c in df_obs.columns), None)
-            unit_col = next((c for c in ["UNITS","units"] if c in df_obs.columns), None)
             if val_col:
                 df_obs_n = df_obs.copy()
                 df_obs_n[val_col] = pd.to_numeric(df_obs_n[val_col], errors="coerce")
@@ -987,7 +993,7 @@ elif "Observations" in page:
             mod_col = next((c for c in ["MODALITY_DESCRIPTION","BODYSITE_DESCRIPTION","DESCRIPTION"] if c in df_img.columns), None)
             if mod_col:
                 ic = df_img[mod_col].value_counts().head(15)
-                hbar(ic.index.tolist(), ic.values.tolist(), "IMAGING STUDY TYPES", A2, 380)
+                hbar(ic.index.tolist(), ic.values.tolist(), "IMAGING STUDY TYPES", GO, 380)
             st.dataframe(df_img.head(200), use_container_width=True)
 
     with tab3:
@@ -1004,7 +1010,7 @@ elif "Observations" in page:
             if cost_col:
                 df_imm[cost_col] = pd.to_numeric(df_imm[cost_col], errors="coerce")
                 c1, c2 = st.columns(2)
-                kpi(c1, "Avg Immunization Cost", f"${df_imm[cost_col].mean():.2f}", "per shot", GO)
+                kpi(c1, "Avg Immunization Cost", f"${df_imm[cost_col].mean():.2f}", "per shot", A2)
                 kpi(c2, "Total Immunizations",   f"{len(df_imm):,}", "administered", GR)
             st.dataframe(df_imm.head(200), use_container_width=True)
 
@@ -1074,9 +1080,9 @@ elif "Model" in page:
     fig2.update_layout(
         **{**PL, "height": 380,
            "polar": dict(
-               bgcolor="#111318",
-               radialaxis=dict(gridcolor="#1f2430", linecolor="#1f2430", range=[0.5,1]),
-               angularaxis=dict(gridcolor="#1f2430", linecolor="#1f2430"),
+               bgcolor="#0e1714",
+               radialaxis=dict(gridcolor="#1a2420", linecolor="#1a2420", range=[0.5,1]),
+               angularaxis=dict(gridcolor="#1a2420", linecolor="#1a2420"),
            ),
            "title": "PERFORMANCE RADAR (NORMALISED)"}
     )
@@ -1092,7 +1098,6 @@ elif "Model" in page:
         "Specificity": ["0.97","0.82","0.88","0.97"],
     }), use_container_width=True, hide_index=True)
 
-    # Load actual output files if available
     df_mc = load_out("model_comparison.csv")
     if df_mc is not None:
         sec("04", "Model Comparison File")
@@ -1121,7 +1126,7 @@ elif "NLP" in page:
     fig = go.Figure(go.Bar(
         x=df_nlp["coef"], y=df_nlp["word"], orientation="h",
         marker=dict(color=df_nlp["coef"].tolist(),
-                    colorscale=[[0,"#1f2430"],[0.5,A2],[1,A3]], line_width=0),
+                    colorscale=[[0,"#1a2420"],[0.5,A2],[1,A3]], line_width=0),
         text=[f"{v:.3f}" for v in df_nlp["coef"]],
         textposition="outside", textfont=dict(size=10, color="#6b7280"),
     ))
@@ -1146,12 +1151,11 @@ elif "NLP" in page:
         cols[i % 4].markdown(f"""
         <div class='mcard' style='padding:14px;margin-bottom:10px;'>
           <div style='font-size:.6rem;color:{A};margin-bottom:4px;letter-spacing:.1em;'>STEP {n}</div>
-          <div style='font-family:Syne,sans-serif;font-weight:700;font-size:.86rem;
-              margin-bottom:4px;color:#e8eaf0;'>{title}</div>
+          <div style='font-family:Space Grotesk,sans-serif;font-weight:700;font-size:.86rem;
+              margin-bottom:4px;color:#dfe6e9;'>{title}</div>
           <div style='font-size:.7rem;color:#6b7280;'>{desc}</div>
         </div>""", unsafe_allow_html=True)
 
-    # Load actual NLP files if available
     df_nw = load_out("nlp_top_words.csv")
     if df_nw is not None:
         sec("03", "Actual NLP Top Words (from training)")
@@ -1183,7 +1187,7 @@ elif "Fairness" in page:
         y=race_stats["RACE"].astype(str),
         orientation="h",
         marker=dict(color=(race_stats["mortality_rate"]*100).tolist(),
-                    colorscale=[[0,"#1f2430"],[0.5,GO],[1,A3]], line_width=0),
+                    colorscale=[[0,"#1a2420"],[0.5,A2],[1,A3]], line_width=0),
         text=[f"{v:.1f}%  (n={n:,})" for v,n in
               zip(race_stats["mortality_rate"]*100, race_stats["n"])],
         textposition="outside", textfont=dict(size=10, color="#6b7280"),
@@ -1192,11 +1196,11 @@ elif "Fairness" in page:
     chart(fig, 360)
 
     sec("02", "Simulated Model AUC by Race/Ethnicity")
-    ibox(f"⚠️ AUC values below are <b style='color:{GO};'>simulated for illustration</b>. Run <code>src/fairness/bias_audit.py</code> to generate real per-group metrics.")
+    ibox(f"⚠️ AUC values below are <b style='color:{A2};'>simulated for illustration</b>. Run <code>src/fairness/bias_audit.py</code> to generate real per-group metrics.")
 
     races    = ["White","Black","Asian","Hispanic","Other","Unknown"]
     auc_sim  = [0.97,   0.92,   0.88,   0.85,      0.80,   0.75]
-    auc_clrs = [GR,     GR,     A,      GO,         A3,    A3]
+    auc_clrs = [GR,     GR,     A,      A2,         A3,    A3]
 
     fig2 = go.Figure(go.Bar(
         x=auc_sim, y=races, orientation="h",
@@ -1207,10 +1211,9 @@ elif "Fairness" in page:
     fig2.update_layout(xaxis_range=[0.6,1.05], title="MODEL AUC BY RACIAL GROUP (SIMULATED)")
     chart(fig2, 320)
 
-    # Disparity metric
     max_auc = max(auc_sim); min_auc = min(auc_sim)
     disparity = max_auc - min_auc
-    disp_color = GR if disparity < 0.05 else GO if disparity < 0.15 else A3
+    disp_color = GR if disparity < 0.05 else A2 if disparity < 0.15 else A3
     c1, c2, c3 = st.columns(3)
     kpi(c1, "Max Group AUC", f"{max_auc:.3f}", "White", GR)
     kpi(c2, "Min Group AUC", f"{min_auc:.3f}", "Unknown", A3)
@@ -1226,7 +1229,7 @@ elif "Fairness" in page:
         y=eth_stats["ETHNICITY"].astype(str),
         orientation="h",
         marker=dict(color=(eth_stats["mortality_rate"]*100).tolist(),
-                    colorscale=[[0,"#1f2430"],[0.5,A2],[1,A3]], line_width=0),
+                    colorscale=[[0,"#1a2420"],[0.5,GO],[1,A3]], line_width=0),
         text=[f"{v:.1f}%  (n={n:,})" for v,n in
               zip(eth_stats["mortality_rate"]*100, eth_stats["n"])],
         textposition="outside", textfont=dict(size=10, color="#6b7280"),
@@ -1234,7 +1237,6 @@ elif "Fairness" in page:
     fig3.update_layout(title="MORTALITY RATE BY ETHNICITY", xaxis_title="Mortality %")
     chart(fig3, 260)
 
-    # Load actual fairness outputs
     df_fr = load_out("fairness_race.csv")
     df_fe = load_out("fairness_ethnicity.csv")
     if df_fr is not None:
@@ -1265,7 +1267,7 @@ elif "SHAP" in page:
         fig = go.Figure(go.Bar(
             x=df_fi_s[imp_col], y=df_fi_s[feat_col], orientation="h",
             marker=dict(color=df_fi_s[imp_col].tolist(),
-                        colorscale=[[0,"#1f2430"],[0.5,A2],[1,A]], line_width=0),
+                        colorscale=[[0,"#1a2420"],[0.5,A2],[1,A]], line_width=0),
             text=df_fi_s[imp_col].round(4), textposition="outside",
             textfont=dict(size=10, color="#6b7280"),
         ))
@@ -1281,7 +1283,7 @@ elif "SHAP" in page:
             fig = go.Figure(go.Bar(
                 x=mean_abs_shap.values, y=mean_abs_shap.index.tolist(), orientation="h",
                 marker=dict(color=mean_abs_shap.values.tolist(),
-                            colorscale=[[0,"#1f2430"],[0.5,A2],[1,A3]], line_width=0),
+                            colorscale=[[0,"#1a2420"],[0.5,A2],[1,A3]], line_width=0),
                 text=[f"{v:.4f}" for v in mean_abs_shap.values],
                 textposition="outside", textfont=dict(size=10, color="#6b7280"),
             ))
@@ -1294,7 +1296,7 @@ elif "SHAP" in page:
         st.markdown("""
         <div class='mcard' style='text-align:center;padding:3rem;'>
           <div style='font-size:2rem;margin-bottom:1rem;'>📊</div>
-          <div style='font-family:Syne,sans-serif;font-size:1rem;color:#e8eaf0;margin-bottom:.5rem;'>
+          <div style='font-family:Space Grotesk,sans-serif;font-size:1rem;color:#dfe6e9;margin-bottom:.5rem;'>
             SHAP values not yet generated
           </div>
           <div style='font-size:.8rem;color:#6b7280;'>Run <code>src/explainability/explain.py</code> to generate shap_values.csv</div>
@@ -1328,13 +1330,13 @@ elif "About" in page:
         cols[i%4].markdown(f"""
         <div class='mcard' style='padding:16px;'>
           <div style='font-size:.6rem;color:{A};margin-bottom:5px;letter-spacing:.1em;'>STEP {n}</div>
-          <div style='font-family:Syne,sans-serif;font-weight:700;font-size:.9rem;
-              color:#e8eaf0;margin-bottom:5px;'>{title}</div>
+          <div style='font-family:Space Grotesk,sans-serif;font-weight:700;font-size:.9rem;
+              color:#dfe6e9;margin-bottom:5px;'>{title}</div>
           <div style='font-size:.72rem;color:#6b7280;line-height:1.5;'>{desc}</div>
         </div>""", unsafe_allow_html=True)
 
     sec("02", "Tech Stack")
-    stack = [("Python 3.11", "Runtime"), ("Streamlit 1.32", "Dashboard"), 
+    stack = [("Python 3.11", "Runtime"), ("Streamlit 1.32", "Dashboard"),
              ("XGBoost 2.0.3", "Gradient Boosting"), ("Scikit-Learn 1.4", "ML Framework"),
              ("Pandas 2.2.1", "Data"), ("NumPy 1.26.4", "Numerics"),
              ("Plotly 5.19", "Visualisation"), ("SHAP", "Explainability"),
@@ -1343,7 +1345,7 @@ elif "About" in page:
     for i, (name, role) in enumerate(stack):
         cols2[i%5].markdown(f"""
         <div class='kcard' style='padding:12px;text-align:center;'>
-          <div style='font-family:Syne,sans-serif;font-weight:700;font-size:.88rem;
+          <div style='font-family:Space Grotesk,sans-serif;font-weight:700;font-size:.88rem;
               color:{A};margin-bottom:3px;'>{name}</div>
           <div style='font-size:.65rem;color:#6b7280;letter-spacing:.08em;'>{role.upper()}</div>
         </div>""", unsafe_allow_html=True)
