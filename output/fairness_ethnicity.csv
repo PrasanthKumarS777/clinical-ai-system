@@ -1,0 +1,3 @@
+ETHNICITY_LABEL,actual_mortality,predicted_mortality,count
+hispanic,0.08569242540168324,0.17977639,1307
+nonhispanic,0.09302548380915884,0.1912382,10438

@@ -1,9 +1,12 @@
+[server]
+headless = true
+enableCORS = false
+maxUploadSize = 200
+
 [theme]
 base = "dark"
-backgroundColor = "#070c12"
-secondaryBackgroundColor = "#0c1520"
-primaryColor = "#00d4ff"
-textColor = "#ddeeff"
-
-[server]
-maxUploadSize = 200
+backgroundColor = "#070d0b"
+secondaryBackgroundColor = "#0e1714"
+primaryColor = "#00b894"
+textColor = "#dfe6e9"
+font = "monospace"
