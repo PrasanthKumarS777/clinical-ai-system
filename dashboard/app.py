@@ -255,7 +255,7 @@ def chart(fig, height=320):
     fig.update_layout(**{**PL, "height": height})
     fig.update_xaxes(gridcolor="#1a2420", linecolor="#1a2420")
     fig.update_yaxes(gridcolor="#1a2420", linecolor="#1a2420")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 def hbar(names, values, title="", color=A, height=320, pct=False):
     txt = [f"{v:.1f}%" if pct else f"{v:,.0f}" for v in values]
@@ -544,7 +544,7 @@ elif "Predictor" in page:
             height=110, label_visibility="collapsed")
 
         show_explain = st.checkbox("Show rule-based explanation panel")
-        predict_btn  = st.button("⚕  RUN MORTALITY PREDICTION", use_container_width=True)
+        predict_btn  = st.button("⚕  RUN MORTALITY PREDICTION", width="stretch")
 
     with tab2:
         if not predict_btn:
@@ -620,7 +620,7 @@ elif "Predictor" in page:
 
             gc1, gc2 = st.columns([1.2, 1])
             with gc1:
-                st.plotly_chart(fig_g, use_container_width=True)
+                st.plotly_chart(fig_g, width="stretch")
                 st.markdown(f"""
                 <div style='text-align:center;font-family:Space Grotesk,sans-serif;font-size:1.6rem;
                     font-weight:800;color:{primary_color};letter-spacing:.1em;margin-top:-1rem;'>
@@ -793,7 +793,7 @@ elif "Population" in page:
         sec("01", "Raw Patient Table")
         ibox(f"Full patient cohort · <b style='color:{A};'>{len(df):,} records</b> · {df.shape[1]} columns")
         n_rows = st.slider("Preview rows", 10, 500, 50)
-        st.dataframe(df.head(n_rows), use_container_width=True)
+        st.dataframe(df.head(n_rows), width="stretch")
         st.download_button("📥 Download Patient CSV",
             df.to_csv(index=False).encode(), "patient_features.csv", "text/csv")
 
@@ -836,7 +836,7 @@ elif "Medications" in page:
                 chart(fig, 280)
 
             sec("03", "Data Preview")
-            st.dataframe(df_med.head(200), use_container_width=True)
+            st.dataframe(df_med.head(200), width="stretch")
             st.download_button("📥 Download", df_med.head(5000).to_csv(index=False).encode(),
                                "medications_sample.csv", "text/csv")
 
@@ -869,7 +869,7 @@ elif "Medications" in page:
                 chart(fig, 280)
 
             sec("03", "Data Preview")
-            st.dataframe(df_cond.head(200), use_container_width=True)
+            st.dataframe(df_cond.head(200), width="stretch")
             st.download_button("📥 Download", df_cond.head(5000).to_csv(index=False).encode(),
                                "conditions_sample.csv", "text/csv")
 
@@ -924,7 +924,7 @@ elif "Encounters" in page:
                 chart(fig, 260)
 
             sec("04", "Data Preview")
-            st.dataframe(df_enc.head(200), use_container_width=True)
+            st.dataframe(df_enc.head(200), width="stretch")
 
     with tab2:
         df_proc = load_csv("procedures.csv")
@@ -940,7 +940,7 @@ elif "Encounters" in page:
                      "TOP 20 PROCEDURES BY FREQUENCY", GR, 420)
 
             sec("02", "Data Preview")
-            st.dataframe(df_proc.head(200), use_container_width=True)
+            st.dataframe(df_proc.head(200), width="stretch")
             st.download_button("📥 Download", df_proc.head(5000).to_csv(index=False).encode(),
                                "procedures_sample.csv", "text/csv")
 
@@ -982,7 +982,7 @@ elif "Observations" in page:
                                 name=obs_name[:30], box_visible=True, meanline_visible=True))
                     fig.update_layout(title="TOP OBSERVATION VALUE DISTRIBUTIONS")
                     chart(fig, 340)
-            st.dataframe(df_obs.head(100), use_container_width=True)
+            st.dataframe(df_obs.head(100), width="stretch")
 
     with tab2:
         df_img = load_csv("imaging_studies.csv")
@@ -994,7 +994,7 @@ elif "Observations" in page:
             if mod_col:
                 ic = df_img[mod_col].value_counts().head(15)
                 hbar(ic.index.tolist(), ic.values.tolist(), "IMAGING STUDY TYPES", GO, 380)
-            st.dataframe(df_img.head(200), use_container_width=True)
+            st.dataframe(df_img.head(200), width="stretch")
 
     with tab3:
         df_imm = load_csv("immunizations.csv")
@@ -1012,7 +1012,7 @@ elif "Observations" in page:
                 c1, c2 = st.columns(2)
                 kpi(c1, "Avg Immunization Cost", f"${df_imm[cost_col].mean():.2f}", "per shot", A2)
                 kpi(c2, "Total Immunizations",   f"{len(df_imm):,}", "administered", GR)
-            st.dataframe(df_imm.head(200), use_container_width=True)
+            st.dataframe(df_imm.head(200), width="stretch")
 
     with tab4:
         df_all = load_csv("allergies.csv")
@@ -1024,7 +1024,7 @@ elif "Observations" in page:
             if desc_col:
                 ac = df_all[desc_col].value_counts().head(15)
                 hbar(ac.index.tolist(), ac.values.tolist(), "TOP ALLERGENS", A3, 360)
-            st.dataframe(df_all.head(200), use_container_width=True)
+            st.dataframe(df_all.head(200), width="stretch")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1086,7 +1086,7 @@ elif "Model" in page:
            ),
            "title": "PERFORMANCE RADAR (NORMALISED)"}
     )
-    st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig2, width="stretch")
 
     sec("03", "Metrics Table")
     st.dataframe(pd.DataFrame({
@@ -1096,12 +1096,12 @@ elif "Model" in page:
         "Recall":      ["0.88","0.68","0.75","0.87"],
         "F1-Score":    ["0.89","0.70","0.76","0.88"],
         "Specificity": ["0.97","0.82","0.88","0.97"],
-    }), use_container_width=True, hide_index=True)
+    }), width="stretch", hide_index=True)
 
     df_mc = load_out("model_comparison.csv")
     if df_mc is not None:
         sec("04", "Model Comparison File")
-        st.dataframe(df_mc, use_container_width=True)
+        st.dataframe(df_mc, width="stretch")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1159,7 +1159,7 @@ elif "NLP" in page:
     df_nw = load_out("nlp_top_words.csv")
     if df_nw is not None:
         sec("03", "Actual NLP Top Words (from training)")
-        st.dataframe(df_nw, use_container_width=True)
+        st.dataframe(df_nw, width="stretch")
         st.download_button("📥 Download", df_nw.to_csv(index=False).encode(),
                            "nlp_top_words.csv", "text/csv")
 
@@ -1241,10 +1241,10 @@ elif "Fairness" in page:
     df_fe = load_out("fairness_ethnicity.csv")
     if df_fr is not None:
         sec("04", "Race Fairness File (from bias_audit.py)")
-        st.dataframe(df_fr, use_container_width=True)
+        st.dataframe(df_fr, width="stretch")
     if df_fe is not None:
         sec("05", "Ethnicity Fairness File")
-        st.dataframe(df_fe, use_container_width=True)
+        st.dataframe(df_fe, width="stretch")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1289,7 +1289,7 @@ elif "SHAP" in page:
             ))
             fig.update_layout(title="MEAN |SHAP| VALUES — GLOBAL FEATURE ATTRIBUTION")
             chart(fig, 380)
-        st.dataframe(df_shap.head(100), use_container_width=True)
+        st.dataframe(df_shap.head(100), width="stretch")
         st.download_button("📥 Download SHAP CSV",
             df_shap.to_csv(index=False).encode(), "shap_values.csv", "text/csv")
     else:
